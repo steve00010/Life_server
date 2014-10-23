@@ -69,11 +69,7 @@ class CfgFunctions
 			class wantedPunish {};
 			class initWanted {};
 		};
-			class Jail_Sys
-		{
-			file = "\life_server\Functions\Jail";
-			class jailSys {};
-		};
+		
 		class Client_Code
 		{
 			file = "\life_server\Functions\Client";
