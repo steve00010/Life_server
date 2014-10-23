@@ -15,7 +15,7 @@ _val = _data select 3;
 if(_price < _val) exitWith {};
 if(_index != -1) then
 {
-	life_wanted_list set[_ind,-1];
+	life_wanted_list set[_index,-1];
 	life_wanted_list = life_wanted_list - [-1];
 };
 diag_log format["WANTED_LIST = %1", life_wanted_list];
