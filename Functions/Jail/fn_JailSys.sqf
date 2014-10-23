@@ -6,7 +6,7 @@
 	I forget?
 */
 private["_unit","_bad","_id","_ret"];
-diag_log "CALLING fn_jailSys!";
+
 _unit = [_this,0,Objnull,[Objnull]] call BIS_fnc_param;
 if(isNull _unit) exitWith {};
 _bad = [_this,1,false,[false]] call BIS_fnc_param;
