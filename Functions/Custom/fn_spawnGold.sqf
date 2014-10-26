@@ -26,6 +26,6 @@ _Pos = position _heli;
 "Marker200" setMarkerSize [500,500];
  _markerText = createMarker ["MarkerText200", _Pos];
 "MarkerText200" setMarkerColor "ColorBlack";
-"MarkerText200" setMarkerText "Shipwreck";
+"MarkerText200" setMarkerText "Heritage Site";
 "MarkerText200" setMarkerType "mil_warning";
 [[5,"<t size='3'><t color='#00FF00'>SHIPWRECK</t></t> <br/><t size='1.5'>A ship wreck site has been spotted, check the area for <t color='#FFFF00'>underwater crates of gold</t>. Check your map</t>"],"life_fnc_broadcast",true,false] spawn life_fnc_MP;
