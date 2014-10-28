@@ -27,7 +27,10 @@ _dbInfo = _vehicle getVariable["dbInfo",[]];
 if(count _dbInfo > 0) then {
 	_uid = _dbInfo select 0;
 	_plate = _dbInfo select 1;
-
+	
+	_vehicle setVariable["vehicle_info_owners",[[_uid1,_unit getVariable["realname",name _unit]]],true];
+	
+	
 	_query = format["UPDATE vehicles SET pid='%3' WHERE pid='%1' AND plate='%2'",_uid,_plate,_uid1];
 	waitUntil {!DB_Async_Active};
 	_sql = [_query,1] call DB_fnc_asyncCall;
