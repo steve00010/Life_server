@@ -20,8 +20,6 @@ if(isNull _vehicle OR isNull _unit) exitWith
 _displayName = getText(configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "displayName");
 _uid1 = getPlayerUID _unit;
 _name = name _unit;
-
-diag_log format ["name: %1",_name];
 _unit = owner _unit;
 
 

@@ -52,7 +52,8 @@ if(_impound) then
 	};
 	
 	if(_uid != getPlayerUID _unit) exitWith
-	{
+	{	
+		diag_log format["UID1: %1, UID2: %2",_uid, getPlayerUID _unit];
 		[[1,(localize "STR_Garage_Store_NoOwnership")],"life_fnc_broadcast",(owner _unit),false] spawn life_fnc_MP;
 		life_garage_store = false;
 		(owner _unit) publicVariableClient "life_garage_store";
