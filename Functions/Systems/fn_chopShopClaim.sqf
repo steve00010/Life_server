@@ -31,7 +31,7 @@ if(count _dbInfo > 0) then {
 	_uid = _dbInfo select 0;
 	_plate = _dbInfo select 1;
 	
-	_vehicle setVariable["vehicle_info_owners",[[_uid1,_name]]],true];
+	_vehicle setVariable["vehicle_info_owners",[[_uid1,_name]],true];
 	
 	
 	_query = format["UPDATE vehicles SET pid='%3',side='civ' WHERE pid='%1' AND plate='%2'",_uid,_plate,_uid1];
