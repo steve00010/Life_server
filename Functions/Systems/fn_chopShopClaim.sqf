@@ -5,7 +5,7 @@
 	Description:
 	Checks whether or not the vehicle is persistent or temp and claimsit 
 */
-private["_unit","_vehicle","_price","_cash","_uid1"];
+private["_unit","_vehicle","_price","_cash","_uid1","_name"];
 _unit = [_this,0,objNull,[objNull]] call BIS_fnc_param;
 _vehicle = [_this,1,objNull,[objNull]] call BIS_fnc_param;
 _price = [_this,2,500,[0]] call BIS_fnc_param;
@@ -19,6 +19,9 @@ if(isNull _vehicle OR isNull _unit) exitWith
 
 _displayName = getText(configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "displayName");
 _uid1 = getPlayerUID _unit;
+_name = name _unit;
+
+diag_log format ["name: %1",_name];
 _unit = owner _unit;
 
 
@@ -28,10 +31,10 @@ if(count _dbInfo > 0) then {
 	_uid = _dbInfo select 0;
 	_plate = _dbInfo select 1;
 	
-	_vehicle setVariable["vehicle_info_owners",[[_uid1,_unit getVariable["realname",name _unit]]],true];
+	_vehicle setVariable["vehicle_info_owners",[[_uid1,_name]]],true];
 	
 	
-	_query = format["UPDATE vehicles SET pid='%3' WHERE pid='%1' AND plate='%2'",_uid,_plate,_uid1];
+	_query = format["UPDATE vehicles SET pid='%3',side='civ' WHERE pid='%1' AND plate='%2'",_uid,_plate,_uid1];
 	waitUntil {!DB_Async_Active};
 	_sql = [_query,1] call DB_fnc_asyncCall;
 };
