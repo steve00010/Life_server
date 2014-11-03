@@ -1,32 +1,19 @@
 /*
-	File: fn_clientDisconnect.sqf
 	Author: Bryan "Tonic" Boardwine
 	
 	Description:
-	When a player disconnect it goes through the all the dead bodies
-	and removes bodies owned by the server. This is built for the new
-	medical / EMS system.
+	When a client disconnects this will remove their corpse and
+	clean up their storage boxes in their house.
 */
+private["_unit","_id","_uid","_name"];
+_unit = _this select 0;
+_id = _this select 1;
+_uid = _this select 2;
+_name = _this select 3;
 
-private["_playerIsDead","_loopcount"];
-
-//Diag_log Format["Client Disconnect (%1) : %2 Dead Bodies", _uid, count allDeadMen];
-
-_playerIsDead = false;
-
-{
-	_pid = _x getVariable["steam64ID","Unknown"];
-	//Diag_log format[ "Client Disconnect (%1) : PlayerID of Dead Body is %2", _uid, _pid];
-	//Diag_log format[ "Client Disconnect (%1) : Variable Check (Revive %2)", _uid, _x getVariable["Revive","Unknown"]];
-	//if(_uid == _pid OR _pid == "") then {
-	if( _pid == _uid ) then 
-	{
-		_playerIsDead = true;
-		_containers = nearestObjects[_x,["WeaponHolderSimulated"],5]; //Fetch list of containers (Simulated = weapons)
-		{deleteVehicle _x;} foreach _containers; //Delete the containers.
-		deleteVehicle _x; //Get rid of the corpse.
-	};
-} foreach allDeadMen;
+_containers = nearestObjects[_unit,["WeaponHolderSimulated"],5];
+{deleteVehicle _x;} foreach _containers;
+deleteVehicle _unit;
 
 if (!_playerIsDead) then
 {
