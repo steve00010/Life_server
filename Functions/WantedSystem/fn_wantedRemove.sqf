@@ -16,9 +16,9 @@ if(_index != -1) then
 	life_wanted_list set[_index,-1];
 	life_wanted_list = life_wanted_list - [-1];
 	//publicVariable "life_wanted_list";
-};
-diag_log format["WANTED_LIST = %1", life_wanted_list];
+	diag_log format["WANTED_LIST = %1", life_wanted_list];
 _query = format["DELETE from wanted WHERE pid='%1';",_uid];
 
 
 waitUntil {sleep (random 0.3); !DB_Async_Active};_queryResult = [_query,1] call DB_fnc_asyncCall;
+};
