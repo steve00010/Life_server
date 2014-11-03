@@ -49,7 +49,7 @@ if(_index != -1) then
 	_crimes pushBack (_type select 0);
 	_val = _data select 3;
 	life_wanted_list set[_index,[_name,_uid,_crimes,(_type select 1) + _val]];
-	diag_log format["Inserting new player into wanted DB"];
+	diag_log format["Inserting  new player into wanted DB"];
 	_query = format["Replace into wanted (pid,charges,bounty) values('%2','%1','%3');", _crimes, _uid,(_type select 1) + _val];
 	waitUntil {sleep (random 0.3); !DB_Async_Active};
 	_queryResult = [_query,1] call DB_fnc_asyncCall;

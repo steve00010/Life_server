@@ -29,7 +29,7 @@ _unit = owner _unit; //for hack purpose!
 //we randomize the thing to not update every single transaction
 _randomnumber = random 100;
 
-if (_randomnumber < 60) exitwith {diag_log "This transaction doesn't update the price!"};
+if (_randomnumber < 10) exitwith {diag_log "This transaction doesn't update the price!"};
 
 
 //we check the factor of the object
