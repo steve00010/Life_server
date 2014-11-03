@@ -58,7 +58,7 @@ if(typeName _sp != "STRING") then {
 if(count _nearVehicles > 0) exitWith
 {
 	serv_sv_use = serv_sv_use - [_vid];
-	[[_price,{life_atmcash = life_atmcash + _this;}],"BIS_fnc_spawn",_unit,false] spawn life_fnc_MP;
+	[[_price,{pbh_life_atmcash = pbh_life_atmcash + _this;}],"BIS_fnc_spawn",_unit,false] spawn life_fnc_MP;
 	[[1,(localize "STR_Garage_SpawnPointError")],"life_fnc_broadcast",_unit,false] spawn life_fnc_MP;
 };
 
