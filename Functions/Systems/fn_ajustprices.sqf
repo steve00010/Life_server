@@ -81,24 +81,26 @@ _minprice = (_x select 4);
 _maxprice = (_x select 5);
 diag_log format["%1,%2,%3,%4,%5,%6,%7,%8,%9,%10",_ressource,_buyprice,_sellprice,_varprice,_minprice,_maxprice,_var,_type,_amount,_sellingfactor];
 if (_ressource == _var) then { //C'est l'item vendu ou achete
-if (_type == 0) then {//si on vend l'item
-	if (_buyprice != 0) then {
-		if((_buyprice - (_varprice * _amount)) > _minprice) then {
-			_buyprice= _buyprice - (_varprice * _amount);
+	if (_type == 0) then {//si on vend l'item
+		if (_buyprice != 0) then {
+			if((_buyprice - (_varprice * _amount)) > _minprice) then {
+				_buyprice= _buyprice - (_varprice * _amount);
+			}
+			else {
+				diag_log "HERE1";
+				_AllOk = false;
+			};
+		};
+		if ((_sellprice - (_varprice * _amount * _sellingfactor)) > _minprice) then {
+			_sellprice = _sellprice - (_varprice * _amount *_sellingfactor);
 		}
 		else {
+			diag_log "HERE2";
 			_AllOk = false;
 		};
-	};
-	if ((_sellprice - (_varprice * _amount *_sellingfactor)) > _minprice) then {
-		_sellprice = _sellprice - (_varprice * _amount *_sellingfactor);
-	}
-	else {
-		_AllOk = false;
-	};
-	if (_buyprice != 0) then {
-		if ((_sellprice >= _buyprice)) then {
-			_buyprice=_sellprice + 15
+		if (_buyprice != 0) then {
+			if ((_sellprice >= _buyprice)) then {
+				_buyprice=_sellprice + 15
 			};
 		};
 	} 
@@ -108,6 +110,7 @@ if (_type == 0) then {//si on vend l'item
 			_buyprice = _buyprice + (_varprice * _amount)
 			;}
 			else {
+			diag_log "HERE3";
 				_AllOk = false;
 			};
 		};
@@ -115,6 +118,7 @@ if (_type == 0) then {//si on vend l'item
 		_sellprice = _sellprice + (_varprice * _amount)
 		;}
 		else {
+		diag_log "HERE4";
 		_AllOk = false;
 		};
 	};
@@ -125,6 +129,7 @@ if (_type == 0) then {//si on vend l'item
 				_buyprice = _buyprice + (_varprice * _amount);
 			}
 			else {
+			diag_log "HERE5";
 				_AllOk = false;
 				};
 			};
@@ -132,6 +137,7 @@ if (_type == 0) then {//si on vend l'item
 			_sellprice = _sellprice + (_varprice * _amount);
 		} 
 		else {
+		diag_log "HERE6";
 			_AllOk = false;
 		};
 
@@ -140,12 +146,14 @@ if (_type == 0) then {//si on vend l'item
 			if( (_buyprice - (_varprice * _amount)) > _minprice ) then {
 				_buyprice= _buyprice - (_varprice * _amount);
 				} else {
+				diag_log "HERE7";
 				_AllOk = false;
 				};
 			};
 		if ((_sellprice - (_varprice * _amount)) > _minprice) then {
 		_sellprice = _sellprice - (_varprice * _amount);
 		}else {
+		diag_log "HERE8";
 			_AllOk = false;
 		};
 	};
@@ -155,6 +163,7 @@ _query =format["UPDATE economy SET buyprice='%1', sellprice='%2' WHERE ressource
 _queryArray set [count _queryArray,_query];
 
 }foreach _queryResult;
+diag_log format["ALL OKAY: %1",_AllOk];
 if (_AllOk) then { //We update the prices!
 {
 diag_log format["UPDATE economy SET buyprice='%1', sellprice='%2' WHERE ressource='%3'",_buyprice,_sellprice,_ressource];
