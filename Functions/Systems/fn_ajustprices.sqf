@@ -7,7 +7,7 @@ Sends a request to update and adjust the price of stuff in the DB.
 */
 
 //[[0,player,life_shop_type,_amount,_price,_var],"TON_fnc_Adjustprices",false,false] spawn life_fnc_MP;
-private["_type","_side","_data","_unit","_ret","_tickTime","_queryResult","_var","_price","_amount"];
+private["_type","_side","_data","_unit","_ret","_tickTime","_queryResult","_var","_price","_amount","_group","_AllOk"];
 _type = [_this,0,0,[0]] call BIS_fnc_param;
 _unit = [_this,1,ObjNull,[ObjNull]] call BIS_fnc_param;
 _data = [_this,2,"",[""]] call BIS_fnc_param;
@@ -82,23 +82,73 @@ _maxprice = (_x select 5);
 
 if (_ressource == _var) then { //C'est l'item vendu ou achete
 if (_type == 0) then {//si on vend l'item
-if (_buyprice != 0) then {if( (_buyprice - (_varprice * _amount)) > _minprice) then {_buyprice= _buyprice - (_varprice * _amount);}else {_allOk = false;};};
-if ((_sellprice - (_varprice * _amount *_sellingfactor)) > _minprice) then {_sellprice = _sellprice - (_varprice * _amount *_sellingfactor);}else {_allOk = false;};
-if (_buyprice != 0) then {if ((_sellprice >= _buyprice)) then {_buyprice=_sellprice + 15};};
-} else {//si on achete l'item
-if (_buyprice != 0) then {if( (_buyprice + (_varprice * _amount)) < (_maxprice+15)) then {_buyprice = _buyprice + (_varprice * _amount);}else {_allOk = false;};};
-if ((_sellprice + (_varprice * _amount)) < _maxprice) then {_sellprice = _sellprice + (_varprice * _amount);}else {_allOk = false;};
-};
-
+	if (_buyprice != 0) then {
+		if((_buyprice - (_varprice * _amount)) > _minprice) then {
+			_buyprice= _buyprice - (_varprice * _amount)
+		;}
+		else {
+			_AllOk = false;
+		};
+	};
+	if ((_sellprice - (_varprice * _amount *_sellingfactor)) > _minprice) then {
+		_sellprice = _sellprice - (_varprice * _amount *_sellingfactor)
+	;}
+	else {
+		_AllOk = false;
+	};
+	if (_buyprice != 0) then {
+		if ((_sellprice >= _buyprice)) then {
+			_buyprice=_sellprice + 15
+			};
+		};
+	} 
+	else {//si on achete l'item
+		if (_buyprice != 0) then {
+			if((_buyprice + (_varprice * _amount)) < (_maxprice+15)) then {
+			_buyprice = _buyprice + (_varprice * _amount)
+			;}
+			else {
+				_AllOk = false;
+			};
+		};
+		if ((_sellprice + (_varprice * _amount)) < _maxprice) then {
+		_sellprice = _sellprice + (_varprice * _amount)
+		;}
+		else {
+		_	AllOk = false;
+		};
+	};
 } else {
-if (_type == 0) then {//si on a vendu un autre item on augmente le prix
-if (_buyprice != 0) then {if( (_buyprice + (_varprice * _amount)) < (_maxprice)) then {_buyprice = _buyprice + (_varprice * _amount);}else {_allOk = false;};};
-if ((_sellprice + (_varprice * _amount)) < _maxprice) then {_sellprice = _sellprice + (_varprice * _amount);} else {_allOk = false;};
+	if (_type == 0) then {//si on a vendu un autre item on augmente le prix
+		if (_buyprice != 0) then {
+			if( (_buyprice + (_varprice * _amount)) < (_maxprice)) then {
+				_buyprice = _buyprice + (_varprice * _amount)
+				;}
+			else {
+				_AllOk = false;
+				};
+			};
+		if ((_sellprice + (_varprice * _amount)) < _maxprice) then {
+			_sellprice = _sellprice + (_varprice * _amount);
+		} 
+		else {
+			_AllOk = false;
+		};
 
-} else { //si on achete un autre item on baisse le prix
-if (_buyprice != 0) then {if( (_buyprice - (_varprice * _amount)) > _minprice ) then {_buyprice= _buyprice - (_varprice * _amount);} else {_allOk = false;};};
-if ((_sellprice - (_varprice * _amount)) > _minprice) then {_sellprice = _sellprice - (_varprice * _amount);}else {_allOk = false;};
-};
+	} else { //si on achete un autre item on baisse le prix
+		if (_buyprice != 0) then {
+			if( (_buyprice - (_varprice * _amount)) > _minprice ) then {
+				_buyprice= _buyprice - (_varprice * _amount);
+				} else {
+				_AllOk = false;
+				};
+			};
+		if ((_sellprice - (_varprice * _amount)) > _minprice) then {
+		_sellprice = _sellprice - (_varprice * _amount);
+		}else {
+			_AllOk = false;
+		};
+	};
 };
 _query =format["UPDATE economy SET buyprice='%1', sellprice='%2' WHERE ressource='%3'",_buyprice,_sellprice,_ressource];
 diag_log format["UPDATE economy SET buyprice='%1', sellprice='%2' WHERE ressource='%3'",_buyprice,_sellprice,_ressource];
