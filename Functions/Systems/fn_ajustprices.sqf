@@ -97,7 +97,7 @@ if (_ressource == _var) then { //C'est l'item vendu ou achete
 		}
 		else {
 			diag_log "HERE2";
-			_sellprice = _minprice;
+			_sellprice = _minprice + 1;
 			//_AllOk = false;
 		};
 		if (_buyprice != 0) then {
@@ -160,7 +160,7 @@ if (_ressource == _var) then { //C'est l'item vendu ou achete
 		if ((_sellprice - (_varprice * _amount)) > _minprice) then {
 		_sellprice = _sellprice - (_varprice * _amount);
 		}else {
-		_sellprice = _minprice;
+		_sellprice = _minprice + 1;
 		diag_log "HERE8";
 		//	_AllOk = false;
 		};
