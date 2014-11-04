@@ -65,6 +65,7 @@ class CfgFunctions
 			class wantedTicket {};
 			class wantedPardon {};
 			class wantedRemove {};
+			class wantedRemoveLocally {};
 			class wantedAdd {};
 			class wantedPunish {};
 			class initWanted {};
