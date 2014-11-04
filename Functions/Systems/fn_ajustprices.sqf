@@ -79,7 +79,7 @@ _sellprice =  (_x select 2);
 _varprice =  (_x select 3);
 _minprice = (_x select 4);
 _maxprice = (_x select 5);
-diag_log format["%1,%2,%3,%4,%5,%6,%7,%8",_ressource,_buyprice,_sellprice,_varprice,_minprice,_maxprice,_var,_type];
+diag_log format["%1,%2,%3,%4,%5,%6,%7,%8,%9,%10",_ressource,_buyprice,_sellprice,_varprice,_minprice,_maxprice,_var,_type,_amount,_sellingfactor];
 if (_ressource == _var) then { //C'est l'item vendu ou achete
 if (_type == 0) then {//si on vend l'item
 	if (_buyprice != 0) then {
