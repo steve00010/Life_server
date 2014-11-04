@@ -115,7 +115,7 @@ if (_type == 0) then {//si on vend l'item
 		_sellprice = _sellprice + (_varprice * _amount)
 		;}
 		else {
-		_	AllOk = false;
+		_AllOk = false;
 		};
 	};
 } else {
