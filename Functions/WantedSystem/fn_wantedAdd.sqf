@@ -32,7 +32,7 @@ switch(_type) do
 	case "482": {_type = ["Intent to distribute",7500]};
 	case "483": {_type = ["Drug Trafficking",9500]};
 	case "459": {_type = ["Burglary",6500]};
-	case "919": {_type = ["Organ Dealing",30000]};
+	case "919": {_type = ["Organ Dealing",20000]};
 	default {_type = [];};
 };
 
