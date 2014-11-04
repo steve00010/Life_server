@@ -101,6 +101,7 @@ if ((_sellprice - (_varprice * _amount)) > _minprice) then {_sellprice = _sellpr
 };
 };
 _query =format["UPDATE economy SET buyprice='%1', sellprice='%2' WHERE ressource='%3'",_buyprice,_sellprice,_ressource];
+diag_log format["UPDATE economy SET buyprice='%1', sellprice='%2' WHERE ressource='%3'",_buyprice,_sellprice,_ressource];
 _queryArray set [count _queryArray,_query];
 
 }foreach _queryResult;
