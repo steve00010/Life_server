@@ -151,12 +151,13 @@ if (_type == 0) then {//si on vend l'item
 	};
 };
 _query =format["UPDATE economy SET buyprice='%1', sellprice='%2' WHERE ressource='%3'",_buyprice,_sellprice,_ressource];
-diag_log format["UPDATE economy SET buyprice='%1', sellprice='%2' WHERE ressource='%3'",_buyprice,_sellprice,_ressource];
+
 _queryArray set [count _queryArray,_query];
 
 }foreach _queryResult;
 if (_AllOk) then { //We update the prices!
 {
+diag_log format["UPDATE economy SET buyprice='%1', sellprice='%2' WHERE ressource='%3'",_buyprice,_sellprice,_ressource];
 waitUntil {sleep (random 0.3); !DB_Async_Active};
 _queryResult = [_x,1] call DB_fnc_asyncCall;
 diag_log "------------- Client Query Request -------------";
