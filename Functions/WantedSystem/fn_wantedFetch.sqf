@@ -22,5 +22,5 @@ _list = [];
 			_list pushBack _x;
 		};
 	};
-} foreach life_wanted_list;
+} forEach life_wanted_list;
 [[_list],"life_fnc_wantedList",_ret,false] spawn life_fnc_MP;
