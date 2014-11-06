@@ -23,9 +23,9 @@ _ownerID = owner _ownerID;
 	The other part is well the SQL statement.
 */
 _query = switch(_side) do {
-	case west: {_returnCount = 10; format["SELECT playerid, name, cash, bankacc, adminlevel, donatorlvl, cop_licenses, coplevel, cop_gear, blacklist FROM players WHERE playerid='%1'",_uid];};
-	case civilian: {_returnCount = 9; format["SELECT playerid, name, cash, bankacc, adminlevel, donatorlvl, civ_licenses, arrested, civ_gear FROM players WHERE playerid='%1'",_uid];};
-	case independent: {_returnCount = 9; format["SELECT playerid, name, cash, bankacc, adminlevel, donatorlvl, med_licenses, mediclevel, med_gear FROM players WHERE playerid='%1'",_uid];};
+	case west: {_returnCount = 10; format["SELECT playerid, name, cash, bankacc, adminlevel, donatorlvl, cop_licenses, coplevel, cop_gear, blacklist, playtime FROM players WHERE playerid='%1'",_uid];};
+	case civilian: {_returnCount = 9; format["SELECT playerid, name, cash, bankacc, adminlevel, donatorlvl, civ_licenses, arrested, civ_gear, playtime FROM players WHERE playerid='%1'",_uid];};
+	case independent: {_returnCount = 9; format["SELECT playerid, name, cash, bankacc, adminlevel, donatorlvl, med_licenses, mediclevel, med_gear, playtime FROM players WHERE playerid='%1'",_uid];};
 };
 
 waitUntil{sleep (random 0.3); !DB_Async_Active};
@@ -71,14 +71,37 @@ _queryResult set[6,_old];
 _new = [(_queryResult select 8)] call DB_fnc_mresToArray;
 if(typeName _new == "STRING") then {_new = call compile format["%1", _new];};
 _queryResult set[8,_new];
+
+
+
+
+
 //Parse data for specific side.
 switch (_side) do {
 	case west: {
 		_queryResult set[9,([_queryResult select 9,1] call DB_fnc_bool)];
+		_old = _queryResult select 10;
+		_new = _old;
+		if(typeName _old == "STRING") then
+		{
+			_new = parseNumber _old;
+		};
+		[_uid, _new] call life_fnc_setPlayTime;
+		_queryResult set[10,_new];
 	};
 	
 	case civilian: {
+		_old = _queryResult select 9;
+		_new = _old;
+		if(typeName _old == "STRING") then
+		{
+			_new = parseNumber _old;
+		};
+		_timeData = [_uid, _new] spawn life_fnc_setPlayTime;
+		_queryResult set[9,_new];
 		_queryResult set[7,([_queryResult select 7,1] call DB_fnc_bool)];
+		
+		
 		_houseData = _uid spawn TON_fnc_fetchPlayerHouses;
 		waitUntil {scriptDone _houseData};
 		_queryResult pushBack (missionNamespace getVariable[format["houses_%1",_uid],[]]);
@@ -86,6 +109,19 @@ switch (_side) do {
 		waitUntil{scriptDone _gangData};
 		_queryResult pushBack (missionNamespace getVariable[format["gang_%1",_uid],[]]);
 		_wantedData = [_uid, _queryResult select 1] spawn life_fnc_initWanted;
+		
+		
+		
+	};
+	case independent: {
+		_old = _queryResult select 9;
+		_new = _old;
+		if(typeName _old == "STRING") then
+		{
+			_new = parseNumber _old;
+		};
+		[_uid, _new] call life_fnc_setPlayTime;
+		_queryResult set[9,_new];
 	};
 };
 
