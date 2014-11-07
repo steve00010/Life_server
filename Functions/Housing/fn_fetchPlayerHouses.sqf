@@ -53,6 +53,7 @@ _return = [];
 		_container = createVehicle[_className,_pos,[],0,"NONE"];
 		waitUntil{!isNil "_container"};
 		_container setPosATL _pos;
+		_container enableRopeAttach false;
 		//_container enableSimulation false;
 		
 		_containers pushBack _container;
