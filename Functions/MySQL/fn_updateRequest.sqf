@@ -33,7 +33,7 @@ for "_i" from 0 to count(_licenses)-1 do {
 
 _licenses = [_licenses] call DB_fnc_mresArray;
 _playtime = [_uid] call life_fnc_getPlayTime;
-_playtime = [_playtime] call life_fnc_numberText;
+
 switch (_side) do {
 	case west: {_query = format["UPDATE players SET name='%1', cash='%2', bankacc='%3', cop_gear='%4', cop_licenses='%5', playtime='%7' WHERE playerid='%6'",_name,_cash,_bank,_gear,_licenses,_uid,_playtime];};
 	case civilian: {_query = format["UPDATE players SET name='%1', cash='%2', bankacc='%3', civ_licenses='%4', civ_gear='%6', arrested='%7', playtime='%8' WHERE playerid='%5'",_name,_cash,_bank,_licenses,_uid,_gear,[_this select 7] call DB_fnc_bool,_playtime];};
