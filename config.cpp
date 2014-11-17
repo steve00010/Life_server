@@ -136,9 +136,10 @@ class CfgFunctions
 			
 		class Smartphone
 		{
-					file = "\life_server\Functions\Smartphone";
-					class handleMessages {};
-					class msgRequest {};
+			file = "\life_server\Functions\Smartphone";
+			class handleMessages {};
+			class msgRequest {};
+			class removeMsg {};
 		};
  	};	
 	
