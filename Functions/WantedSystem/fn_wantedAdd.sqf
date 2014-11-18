@@ -34,7 +34,7 @@ switch(_type) do
 	case "459": {_type = ["Burglary",6500]};
 	case "919": {_type = ["Organ Dealing",20000]};
 	case "390": {_type = ["Public Intoxication",9000]};
-	case "902": {_type = ["Participating in a prison break",75000]};
+	case "902": {_type = ["Participating in a prison break",15000]};
 	default {_type = [];};
 };
 
