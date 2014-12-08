@@ -80,6 +80,7 @@ class CfgFunctions
 			file = "\life_server\Functions\Client";
 			class getPlayTime {};
 			class setPlayTime {};
+			class setOnline {};
 		};
 	};
 	
