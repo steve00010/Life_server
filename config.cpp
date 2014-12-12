@@ -81,6 +81,7 @@ class CfgFunctions
 			class getPlayTime {};
 			class setPlayTime {};
 			class setOnline {};
+			class logMSG {};
 		};
 	};
 	
@@ -91,7 +92,7 @@ class CfgFunctions
 		{
 			file = "\life_server\Functions\Systems";
 			class managesc {};
-			class cleanup {};
+			class cleanup {};	
 			class huntingZone {};
 			class getID {};
 			class vehicleCreate {};
