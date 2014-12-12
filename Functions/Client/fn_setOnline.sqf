@@ -1,7 +1,7 @@
 private["_uid", "_onoff"];
 
 _uid = [_this,0,"",[""]] call BIS_fnc_param;
-_uid = [_this,1,"",[""]] call BIS_fnc_param;
+_onoff = [_this,1,"",[""]] call BIS_fnc_param;
 
 if(_onoff == 0) then {
 	_query = format["UPDATE players SET online=0 WHERE playerid='%1'",_uid];
