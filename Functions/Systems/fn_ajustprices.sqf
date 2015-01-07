@@ -49,11 +49,11 @@ _AllOk = TRUE;
 		//diag_log format ["var : %1 (%2)", _var , typeName _var];
 		_ressource = _x select 0;
 		//diag_log format ["ressource : %1 (%2)", _ressource  , typeName _ressource ];
-		_buyprice =  (_x select 1);
-		_sellprice =  (_x select 2);
-		_varprice =  (_x select 3);
-		_minprice = (_x select 4);
-		_maxprice = (_x select 5);
+		_buyprice =  (_x select 3);
+		_sellprice =  (_x select 4);
+		_varprice =  (_x select 5);
+		_minprice = (_x select 6);
+		_maxprice = (_x select 7);
 		//diag_log format["%1,%2,%3,%4,%5,%6,%7,%8,%9,%10",_ressource,_buyprice,_sellprice,_varprice,_minprice,_maxprice,_var,_type,_amount,_sellingfactor];
 		if (_ressource == _var) then { //C'est l'item vendu ou achete
 			if (_type == 0) then {//si on vend l'item
