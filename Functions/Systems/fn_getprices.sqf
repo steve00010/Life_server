@@ -61,7 +61,7 @@ default {_query =  "Error"};
 		};
 	};
 	if(_query == "rebel") then {	
-		if(_x select 2 == _data OR _x select 2 == "rebel" ) then {
+		if(_x select 2 == _data OR _x select 2 == "market" ) then {
 			_queryResult pushback [_x select 0, _x select 3,_x select 4];
 		};
 	};

@@ -30,7 +30,7 @@ _unit = owner _unit; //for hack purpose!
 _randomnumber = random 100;
 
 if (_randomnumber < 10) exitwith {diag_log "This transaction doesn't update the price!"};
-
+_group = -1;
 
 {
 	if(_x select 0 == _var) then {
