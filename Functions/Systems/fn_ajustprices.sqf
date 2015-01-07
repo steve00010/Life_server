@@ -54,7 +54,7 @@ _AllOk = TRUE;
 		_varprice =  (_x select 5);
 		_minprice = (_x select 6);
 		_maxprice = (_x select 7);
-		//diag_log format["%1,%2,%3,%4,%5,%6,%7,%8,%9,%10",_ressource,_buyprice,_sellprice,_varprice,_minprice,_maxprice,_var,_type,_amount,_sellingfactor];
+		diag_log format["1IST: %1,%2,%3,%4,%5,%6,%7,%8,%9,%10",_ressource,_buyprice,_sellprice,_varprice,_minprice,_maxprice,_var,_type,_amount,_sellingfactor];
 		if (_ressource == _var) then { //C'est l'item vendu ou achete
 			if (_type == 0) then {//si on vend l'item
 				if (_buyprice != 0) then {
@@ -134,6 +134,10 @@ _AllOk = TRUE;
 			};
 		};
 		_index = [_ressource,life_economy] call TON_fnc_index;
+		diag_log format["RES: %1",_ressource];
+		diag_log format["BUY:%1, SELL: %2",_x select 3,_x select 4];
+		diag_log format["BUY1:%1, SELL1: %2",_buyprice,_sellprice];
+		
 		life_economy set[_index,[_ressource,_group,_x select 2,_buyprice,_sellprice,_varprice,_minprice,_maxprice]];
 	
 	};
