@@ -7,6 +7,7 @@ publicVariable "life_server_isReady";
 [] execVM "\life_server\functions.sqf";
 [] execVM "\life_server\eventhandlers.sqf";
 
+
 //I am aiming to confuse people including myself, ignore the ui checks it's because I test locally.
 
 _extDB = false;
@@ -78,7 +79,7 @@ life_gang_list = [];
 publicVariable "life_gang_list";
 life_wanted_list = [];
 client_session_list = [];
-
+life_economy = [];
 [] execFSM "\life_server\cleanup.fsm";
 
 [] spawn
@@ -94,6 +95,8 @@ client_session_list = [];
 };
 
 [] spawn TON_fnc_federalUpdate;
+[] spawn TON_fnc_loadEconomy;
+
 
 [] spawn
 {

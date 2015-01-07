@@ -31,41 +31,43 @@ _query = switch (_data) do {
 
 
 
-case "market" :{ format["SELECT ressource, buyprice, sellprice FROM economy WHERE shoptype='%1' ",_data];};
-case "heroin" :{ format["SELECT ressource, buyprice, sellprice FROM economy WHERE shoptype='%1' ",_data];};
-case "rebel" :{ format["SELECT ressource, buyprice, sellprice FROM economy WHERE shoptype='%1' OR shoptype='market' ",_data];};
-case "fishmarket" :{ format["SELECT ressource, buyprice, sellprice FROM economy WHERE shoptype='%1' ",_data];};
-case "wongs" :{ format["SELECT ressource, buyprice, sellprice FROM economy WHERE shoptype='%1' ",_data];};
-case "oil" :{ format["SELECT ressource, buyprice, sellprice FROM economy WHERE shoptype='%1' ",_data];};
-case "cop" :{ format["SELECT ressource, buyprice, sellprice FROM economy WHERE shoptype='%1' ",_data];};
-case "diamond" :{ format["SELECT ressource, buyprice, sellprice FROM economy WHERE shoptype='%1' ",_data];};
-case "iron" :{ format["SELECT ressource, buyprice, sellprice FROM economy WHERE shoptype='%1' ",_data];};
-case "glass" :{ format["SELECT ressource, buyprice, sellprice FROM economy WHERE shoptype='%1' ",_data];};
-case "salt" :{ format["SELECT ressource, buyprice, sellprice FROM economy WHERE shoptype='%1' ",_data];};
-case "cement" :{ format["SELECT ressource, buyprice, sellprice FROM economy WHERE shoptype='%1' ",_data];};
-case "gold" :{ format["SELECT ressource, buyprice, sellprice FROM economy WHERE shoptype='%1' ",_data];};
-case "bar" :{ format["SELECT ressource, buyprice, sellprice FROM economy WHERE shoptype='%1' ",_data];};
-case "organ" :{ format["SELECT ressource, buyprice, sellprice FROM economy WHERE shoptype='%1' ",_data];};
-case "gang" :{ format["SELECT ressource, buyprice, sellprice FROM economy WHERE shoptype='rebel' OR shoptype='market' ",_data];};
-case "economy" :{ format["SELECT ressource, buyprice, sellprice FROM economy",_data];};
+case "market" :{ "name"};
+case "heroin" :{ "name"};
+case "rebel" :{ "rebel"};
+case "fishmarket" :{ "name"};
+case "wongs" :{ "name"};
+case "oil" :{ "name"};
+case "cop" :{ "name"};
+case "diamond" :{ "name"};
+case "iron" :{ "name"};
+case "glass" :{ "name"};
+case "salt" :{ "name"};
+case "cement" :{ "name"};
+case "gold" :{ "name"};
+case "bar" :{ "name"};
+case "organ" :{ "name"};
+case "gang" :{ "rebel"};
+case "economy" :{ "economy"};
 default {"Error"};
 };
 
 
-if(_query == "Error") exitWith {
-diag_log "error";
-};
+{
+	if(_query == "name") {
+		if(_x select 1 == _data) {
+			_queryResult pushback [_x select 0, _x select 3,_x select 4];
+		}
+	}
+	if(_query == "rebel") {	
+		if(_x select 1 == _data OR _x select 1 == "rebel" ) {
+			_queryResult pushback [_x select 0, _x select 3,_x select 4];
+		}
+	}
+	if(_query == "economy") {
+		_queryResult pushback [_x select 0, _x select 3,_x select 4];
+	}
 
-waitUntil{sleep (random 0.3); !DB_Async_Active};
-_tickTime = diag_tickTime;
-_queryResult = [_query,2,true] call DB_fnc_asyncCall;
-
-diag_log "------------- Client Query Request -------------";
-diag_log format["QUERY: %1",_query];
-diag_log format["Time to complete: %1 (in seconds)",(diag_tickTime - _tickTime)];
-diag_log format["Result: %1",_queryResult];
-diag_log "------------------------------------------------";
-
+} forEach life_economy;
 if (_data == "economy") exitwith {[[_type,_queryResult],"life_fnc_virt_updateEconomy",_unit,false] spawn life_fnc_MP;};
 
 [[_type,_queryResult],"life_fnc_virt_updateprice",_unit,false] spawn life_fnc_MP;

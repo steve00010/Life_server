@@ -32,146 +32,109 @@ _randomnumber = random 100;
 if (_randomnumber < 10) exitwith {diag_log "This transaction doesn't update the price!"};
 
 
-//we check the factor of the object
-_query = format["SELECT factor FROM economy WHERE ressource='%1'",_var];
+{
+	if(_x select 0 == _var) {
+		_group = _x select 1;
+		_sellingfactor = _sellingfactor + 1;
+	}
 
-waitUntil{sleep (random 0.3); !DB_Async_Active};
-_tickTime = diag_tickTime;
-_queryResult = [_query,2,true] call DB_fnc_asyncCall;
+} forEach life_economy;
 
-diag_log "------------- Client Query Request -------------";
-diag_log format["QUERY: %1",_query];
-diag_log format["Time to complete: %1 (in seconds)",(diag_tickTime - _tickTime)];
-diag_log format["Result: %1",_queryResult];
-diag_log "------------------------------------------------";
+_sellingfactor =_sellingfactor-1;
 
-if (((_queryResult select 0) select 0) == 0) exitwith {};//the factor 0 is not a real group
-
-_group = ((_queryResult select 0) select 0);
-
-_query = format["SELECT ressource, buyprice, sellprice, varprice, minprice, maxprice FROM economy WHERE factor='%1'",_group];
-
-if(_query == "Error") exitWith {
-
-diag_log "error";
-};
-
-waitUntil{sleep (random 0.3); !DB_Async_Active};
-_tickTime = diag_tickTime;
-_queryResult = [_query,2,true] call DB_fnc_asyncCall;
-
-diag_log "------------- Client Query Request -------------";
-diag_log format["QUERY: %1",_query];
-diag_log format["Time to complete: %1 (in seconds)",(diag_tickTime - _tickTime)];
-diag_log format["Result: %1",_queryResult];
-diag_log "------------------------------------------------";
-_sellingfactor =((count _queryResult)-1);
-_query ="";
-_queryArray = [];
 _AllOk = TRUE;
 {
-//diag_log format ["test : %1 (%2)", _this , typeName _this];
-//diag_log format ["var : %1 (%2)", _var , typeName _var];
-_ressource = _x select 0;
-//diag_log format ["ressource : %1 (%2)", _ressource  , typeName _ressource ];
-_buyprice =  (_x select 1);
-_sellprice =  (_x select 2);
-_varprice =  (_x select 3);
-_minprice = (_x select 4);
-_maxprice = (_x select 5);
-//diag_log format["%1,%2,%3,%4,%5,%6,%7,%8,%9,%10",_ressource,_buyprice,_sellprice,_varprice,_minprice,_maxprice,_var,_type,_amount,_sellingfactor];
-if (_ressource == _var) then { //C'est l'item vendu ou achete
-	if (_type == 0) then {//si on vend l'item
-		if (_buyprice != 0) then {
-			if((_buyprice - (_varprice * _amount)) > _minprice) then {
-				_buyprice= _buyprice - (_varprice * _amount);
-			}
-			else {
-				_buyprice = _minprice;
-				//_AllOk = false;
-			};
-		};
-		if ((_sellprice - (_varprice * _amount * _sellingfactor)) > _minprice) then {
-			_sellprice = _sellprice - (_varprice * _amount *_sellingfactor);
-		}
-		else {
-			_sellprice = _minprice + 1;
-			//_AllOk = false;
-		};
-		if (_buyprice != 0) then {
-			if ((_sellprice >= _buyprice)) then {
-				_buyprice=_sellprice + 15
-			};
-		};
-	} 
-	else {//si on achete l'item
-		if (_buyprice != 0) then {
-			if((_buyprice + (_varprice * _amount)) < (_maxprice+15)) then {
-			_buyprice = _buyprice + (_varprice * _amount);
-			}
-			else {
-			_buyprice = _maxprice;
-			//	_AllOk = false;
-			};
-		};
-		if ((_sellprice + (_varprice * _amount)) < _maxprice) then {
-		_sellprice = _sellprice + (_varprice * _amount)
-		;}
-		else {
-		_sellprice = _maxprice;
-	//	_AllOk = false;
-		};
-	};
-} else {
-	if (_type == 0) then {//si on a vendu un autre item on augmente le prix
-		if (_buyprice != 0) then {
-			if( (_buyprice + (_varprice * _amount)) < (_maxprice)) then {
-				_buyprice = _buyprice + (_varprice * _amount);
-			}
-			else {
-			_buyprice = _maxprice;
+	if(_x select 1 == _group) {
+		//diag_log format ["test : %1 (%2)", _this , typeName _this];
+		//diag_log format ["var : %1 (%2)", _var , typeName _var];
+		_ressource = _x select 0;
+		//diag_log format ["ressource : %1 (%2)", _ressource  , typeName _ressource ];
+		_buyprice =  (_x select 1);
+		_sellprice =  (_x select 2);
+		_varprice =  (_x select 3);
+		_minprice = (_x select 4);
+		_maxprice = (_x select 5);
+		//diag_log format["%1,%2,%3,%4,%5,%6,%7,%8,%9,%10",_ressource,_buyprice,_sellprice,_varprice,_minprice,_maxprice,_var,_type,_amount,_sellingfactor];
+		if (_ressource == _var) then { //C'est l'item vendu ou achete
+			if (_type == 0) then {//si on vend l'item
+				if (_buyprice != 0) then {
+					if((_buyprice - (_varprice * _amount)) > _minprice) then {
+						_buyprice= _buyprice - (_varprice * _amount);
+					}
+					else {
+						_buyprice = _minprice;
+						//_AllOk = false;
+					};
+				};
+				if ((_sellprice - (_varprice * _amount * _sellingfactor)) > _minprice) then {
+					_sellprice = _sellprice - (_varprice * _amount *_sellingfactor);
+				}
+				else {
+					_sellprice = _minprice + 1;
+					//_AllOk = false;
+				};
+				if (_buyprice != 0) then {
+					if ((_sellprice >= _buyprice)) then {
+						_buyprice=_sellprice + 15
+					};
+				};
+			} 
+			else {//si on achete l'item
+				if (_buyprice != 0) then {
+					if((_buyprice + (_varprice * _amount)) < (_maxprice+15)) then {
+					_buyprice = _buyprice + (_varprice * _amount);
+					}
+					else {
+					_buyprice = _maxprice;
+					//	_AllOk = false;
+					};
+				};
+				if ((_sellprice + (_varprice * _amount)) < _maxprice) then {
+				_sellprice = _sellprice + (_varprice * _amount)
+				;}
+				else {
+				_sellprice = _maxprice;
 			//	_AllOk = false;
 				};
 			};
-		if ((_sellprice + (_varprice * _amount)) < _maxprice) then {
-			_sellprice = _sellprice + (_varprice * _amount);
-		} 
-		else {
-		_sellprice = _maxprice;
-		//	_AllOk = false;
-		};
+		} else {
+			if (_type == 0) then {//si on a vendu un autre item on augmente le prix
+				if (_buyprice != 0) then {
+					if( (_buyprice + (_varprice * _amount)) < (_maxprice)) then {
+						_buyprice = _buyprice + (_varprice * _amount);
+					}
+					else {
+					_buyprice = _maxprice;
+					//	_AllOk = false;
+						};
+					};
+				if ((_sellprice + (_varprice * _amount)) < _maxprice) then {
+					_sellprice = _sellprice + (_varprice * _amount);
+				} 
+				else {
+				_sellprice = _maxprice;
+				//	_AllOk = false;
+				};
 
-	} else { //si on achete un autre item on baisse le prix
-		if (_buyprice != 0) then {
-			if( (_buyprice - (_varprice * _amount)) > _minprice ) then {
-				_buyprice= _buyprice - (_varprice * _amount);
-				} else {
-				_buyprice = _minprice;
-			//	_AllOk = false;
+			} else { //si on achete un autre item on baisse le prix
+				if (_buyprice != 0) then {
+					if( (_buyprice - (_varprice * _amount)) > _minprice ) then {
+						_buyprice= _buyprice - (_varprice * _amount);
+						} else {
+						_buyprice = _minprice;
+					//	_AllOk = false;
+						};
+					};
+				if ((_sellprice - (_varprice * _amount)) > _minprice) then {
+				_sellprice = _sellprice - (_varprice * _amount);
+				}else {
+				_sellprice = _minprice + 1;
+				//	_AllOk = false;
 				};
 			};
-		if ((_sellprice - (_varprice * _amount)) > _minprice) then {
-		_sellprice = _sellprice - (_varprice * _amount);
-		}else {
-		_sellprice = _minprice + 1;
-		//	_AllOk = false;
 		};
+
+	_x set[_ressource,_group,_x select 2,_buyprice,_sellprice,_varprice,_minprice,_maxprice];
+	
 	};
-};
-_query =format["UPDATE economy SET buyprice='%1', sellprice='%2' WHERE ressource='%3'",_buyprice,_sellprice,_ressource];
-
-_queryArray set [count _queryArray,_query];
-
-}foreach _queryResult;
-//diag_log format["ALL OKAY: %1",_AllOk];
-if (_AllOk) then { //We update the prices!
-{
-waitUntil {sleep (random 0.3); !DB_Async_Active};
-_queryResult = [_x,1] call DB_fnc_asyncCall;
-diag_log "------------- Client Query Request -------------";
-diag_log format["QUERY: %1",_x];
-diag_log format["Time to complete: %1 (in seconds)",(diag_tickTime - _tickTime)];
-diag_log format["Result: %1",_queryResult];
-diag_log "------------------------------------------------";
-}foreach _queryArray;
-};
+}forEach life_economy;

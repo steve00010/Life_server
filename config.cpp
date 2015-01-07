@@ -113,6 +113,7 @@ class CfgFunctions
 			class getPrices {};
 			class ajustprices {};
 			class goldUpdate {};
+			class loadEconomy {};
 		};
 			
 		class Housing
