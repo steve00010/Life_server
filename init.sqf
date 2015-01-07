@@ -104,9 +104,8 @@ life_economy = [];
 	sleep((60*60*3) - 60);
 	[] spawn TON_fnc_saveEconomy;
 		
-	}
-
-}
+	};
+};
 
 [] spawn
 {
