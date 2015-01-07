@@ -27,45 +27,45 @@ diag_log "data ou type ou unit null";
 _unit = owner _unit;
 
 
-_query = switch (_data) do {
+switch (_data) do {
 
 
 
-case "market" :{ "name"};
-case "heroin" :{ "name"};
-case "rebel" :{ "rebel"};
-case "fishmarket" :{ "name"};
-case "wongs" :{ "name"};
-case "oil" :{ "name"};
-case "cop" :{ "name"};
-case "diamond" :{ "name"};
-case "iron" :{ "name"};
-case "glass" :{ "name"};
-case "salt" :{ "name"};
-case "cement" :{ "name"};
-case "gold" :{ "name"};
-case "bar" :{ "name"};
-case "organ" :{ "name"};
-case "gang" :{ "rebel"};
-case "economy" :{ "economy"};
-default {"Error"};
+case "market" :{  _query =  "name"};
+case "heroin" :{ _query =  "name"};
+case "rebel" :{ _query =  "rebel"};
+case "fishmarket" :{ _query =  "name"};
+case "wongs" :{ _query = "name"};
+case "oil" :{  _query =  "name"};
+case "cop" :{ _query =  "name"};
+case "diamond" :{_query =   "name"};
+case "iron" :{ _query =  "name"};
+case "glass" :{_query =   "name"};
+case "salt" :{ _query =  "name"};
+case "cement" :{ _query =  "name"};
+case "gold" :{ _query =  "name"};
+case "bar" :{ _query =  "name"};
+case "organ" :{ _query =  "name"};
+case "gang" :{ _query =  "rebel"};
+case "economy" :{_query =  "economy"};
+default {_query =  "Error"};
 };
 
 
 {
-	if(_query == "name") {
-		if(_x select 1 == _data) {
+	if(_query == "name") then {
+		if(_x select 1 == _data) then {
 			_queryResult pushback [_x select 0, _x select 3,_x select 4];
-		}
-	}
-	if(_query == "rebel") {	
-		if(_x select 1 == _data OR _x select 1 == "rebel" ) {
+		};
+	};
+	if(_query == "rebel") then {	
+		if(_x select 1 == _data OR _x select 1 == "rebel" ) then {
 			_queryResult pushback [_x select 0, _x select 3,_x select 4];
-		}
-	}
-	if(_query == "economy") {
+		};
+	};
+	if(_query == "economy") then {
 		_queryResult pushback [_x select 0, _x select 3,_x select 4];
-	}
+	};
 
 } forEach life_economy;
 if (_data == "economy") exitwith {[[_type,_queryResult],"life_fnc_virt_updateEconomy",_unit,false] spawn life_fnc_MP;};

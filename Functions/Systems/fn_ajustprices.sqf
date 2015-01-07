@@ -33,10 +33,10 @@ if (_randomnumber < 10) exitwith {diag_log "This transaction doesn't update the 
 
 
 {
-	if(_x select 0 == _var) {
+	if(_x select 0 == _var) then {
 		_group = _x select 1;
 		_sellingfactor = _sellingfactor + 1;
-	}
+	};
 
 } forEach life_economy;
 
@@ -44,7 +44,7 @@ _sellingfactor =_sellingfactor-1;
 
 _AllOk = TRUE;
 {
-	if(_x select 1 == _group) {
+	if(_x select 1 == _group) then {
 		//diag_log format ["test : %1 (%2)", _this , typeName _this];
 		//diag_log format ["var : %1 (%2)", _var , typeName _var];
 		_ressource = _x select 0;
