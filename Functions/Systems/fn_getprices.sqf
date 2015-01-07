@@ -10,11 +10,8 @@ _type = [_this,0,0,[0]] call BIS_fnc_param;
 _unit = [_this,1,ObjNull,[ObjNull]] call BIS_fnc_param;
 _data= [_this,2,"",[""]] call BIS_fnc_param;
 _queryResult = [];
-<<<<<<< HEAD
-_query = "";
-=======
 
->>>>>>> origin/master
+_query = "";
 //Error checks
 
 diag_log format ["%1   %2    %3",_unit,_type,_data];
@@ -58,12 +55,13 @@ default {_query =  "Error"};
 
 {
 	if(_query == "name") then {
-		if(_x select 1 == _data) then {
+		//diag_log format["x1: %1, data: %2",_x select 1,_data];
+		if(_x select 2 == _data) then {
 			_queryResult pushback [_x select 0, _x select 3,_x select 4];
 		};
 	};
 	if(_query == "rebel") then {	
-		if(_x select 1 == _data OR _x select 1 == "rebel" ) then {
+		if(_x select 2 == _data OR _x select 1 == "rebel" ) then {
 			_queryResult pushback [_x select 0, _x select 3,_x select 4];
 		};
 	};
