@@ -114,6 +114,7 @@ class CfgFunctions
 			class ajustprices {};
 			class goldUpdate {};
 			class loadEconomy {};
+			class saveEconomy {};
 		};
 			
 		class Housing
