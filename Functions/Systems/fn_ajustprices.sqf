@@ -7,7 +7,7 @@ Sends a request to update and adjust the price of stuff in the DB.
 */
 
 //[[0,player,life_shop_type,_amount,_price,_var],"TON_fnc_Adjustprices",false,false] spawn life_fnc_MP;
-private["_type","_side","_data","_unit","_ret","_tickTime","_queryResult","_var","_price","_amount","_group","_AllOk"];
+private["_type","_side","_data","_unit","_ret","_tickTime","_queryResult","_var","_price","_amount","_group","_AllOk","_i"];
 _type = [_this,0,0,[0]] call BIS_fnc_param;
 _unit = [_this,1,ObjNull,[ObjNull]] call BIS_fnc_param;
 _data = [_this,2,"",[""]] call BIS_fnc_param;
@@ -15,7 +15,7 @@ _amount = [_this,3,0,[0]] call BIS_fnc_param;
 _price = [_this,4,0,[0]] call BIS_fnc_param;
 _var = [_this,5,"",[""]] call BIS_fnc_param;
 
-
+_i=0;
 //Error checks
 
 diag_log format ["%1   %2    %3    %4      %5      %6",_unit,_type,_data,_amount,_price,_var];
@@ -133,8 +133,8 @@ _AllOk = TRUE;
 				};
 			};
 		};
-
-		life_economy set[_x,[_ressource,_group,_x select 2,_buyprice,_sellprice,_varprice,_minprice,_maxprice]];
+		_index = [_ressource,life_economy] call TON_fnc_index;
+		life_economy set[_index,[_ressource,_group,_x select 2,_buyprice,_sellprice,_varprice,_minprice,_maxprice]];
 	
 	};
 }forEach life_economy;
