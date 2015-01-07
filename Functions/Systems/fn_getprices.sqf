@@ -5,12 +5,12 @@ Author: Worldtrade1101
 Description:
 Send a query to retrieve the price of stuff on the server
 */
-private["_type","_side","_data","_unit","_ret","_tickTime","_queryResult"];
+private["_type","_side","_data","_unit","_ret","_tickTime","_queryResult","_query"];
 _type = [_this,0,0,[0]] call BIS_fnc_param;
 _unit = [_this,1,ObjNull,[ObjNull]] call BIS_fnc_param;
 _data= [_this,2,"",[""]] call BIS_fnc_param;
-
-
+_queryResult = [];
+_query = "";
 //Error checks
 
 diag_log format ["%1   %2    %3",_unit,_type,_data];
@@ -68,6 +68,7 @@ default {_query =  "Error"};
 	};
 
 } forEach life_economy;
+diag_log format["QR: %1",_queryResult];
 if (_data == "economy") exitwith {[[_type,_queryResult],"life_fnc_virt_updateEconomy",_unit,false] spawn life_fnc_MP;};
 
 [[_type,_queryResult],"life_fnc_virt_updateprice",_unit,false] spawn life_fnc_MP;

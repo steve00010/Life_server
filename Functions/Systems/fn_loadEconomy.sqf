@@ -6,22 +6,6 @@ Description:
 Send a query to retrieve the price of stuff on the server
 */
 private["_type","_side","_data","_unit","_ret","_tickTime","_queryResult"];
-_type = [_this,0,0,[0]] call BIS_fnc_param;
-_unit = [_this,1,ObjNull,[ObjNull]] call BIS_fnc_param;
-_data= [_this,2,"",[""]] call BIS_fnc_param;
-
-
-//Error checks
-
-diag_log format ["%1   %2    %3",_unit,_type,_data];
-if( (_data == "") OR (isNull _unit)) exitWith
-{
-
-diag_log "data ou type ou unit null";
-};
-
-_unit = owner _unit;
-
 
 _query = "SELECT ressource, buyprice, sellprice, shoptype,factor, varprice, minprice, maxprice FROM economy";
 
@@ -54,3 +38,4 @@ diag_log "------------------------------------------------";
 
 } forEach _queryResult;
 
+diag_log format["%1",life_economy];
