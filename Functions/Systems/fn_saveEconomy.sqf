@@ -5,7 +5,7 @@ Author: Steve
 Description:
 Send a query to save the prices of stuff on the server economy
 */
-private["_queryResult"];
+private["_queryResult","_tickTime"];
 _queryArray = [];
 
 {
@@ -16,6 +16,7 @@ _queryArray pushBack _query;
 } forEach life_economy;
 
 {
+	_tickTime = diag_tickTime;
 	waitUntil {sleep (random 0.3); !DB_Async_Active};
 	_queryResult = [_x,1] call DB_fnc_asyncCall;
 	diag_log "------------- Client Query Request -------------";
