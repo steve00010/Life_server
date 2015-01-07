@@ -23,7 +23,7 @@ if( (_data == "") OR (isNull _unit)) exitWith
 {
 diag_log "data ou type ou unit null";
 };
-
+_sellingfactor = 0;
 _unit = owner _unit; //for hack purpose!
 
 //we randomize the thing to not update every single transaction
@@ -134,7 +134,7 @@ _AllOk = TRUE;
 			};
 		};
 
-	_x set[_ressource,_group,_x select 2,_buyprice,_sellprice,_varprice,_minprice,_maxprice];
+		life_economy set[_x,[_ressource,_group,_x select 2,_buyprice,_sellprice,_varprice,_minprice,_maxprice]];
 	
 	};
 }forEach life_economy;
