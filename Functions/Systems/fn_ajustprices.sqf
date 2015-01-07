@@ -40,7 +40,7 @@ _group = -1;
 
 } forEach life_economy;
 
-_sellingfactor =_sellingfactor-1;
+
 
 _AllOk = TRUE;
 {
