@@ -26,16 +26,18 @@ diag_log format["Result: %1",_queryResult];
 diag_log "------------------------------------------------";
 
 {
-	_resource = _queryResult select 0;
-	_buyprice = _queryResult select 1;
-	_sellprice = _queryResult select 2;
-	_shoptype = _queryResult select 3;
-	_factor = _queryResult select 4;
-	_varprice = _queryResult select 5;
-	_minprice = _queryResult select 6;
-	_maxprice = _queryResult select 7;
+	_resource = _x select 0;
+	_buyprice = _x select 1;
+	_sellprice = _x select 2;
+	_shoptype = _x select 3;
+	_factor = _x select 4;
+	_varprice = _x select 5;
+	_minprice = _x select 6;
+	_maxprice = _x select 7;
 	life_economy pushBack [_resource,_factor,_shoptype,_buyprice,_sellprice,_varprice,_minprice,_maxprice];
-
+	diag_log format["RES: %1",_resource];
 } forEach _queryResult;
 
-diag_log format["%1",life_economy];
+
+diag_log format["ECON: %1",life_economy];
+

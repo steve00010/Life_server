@@ -10,7 +10,11 @@ _type = [_this,0,0,[0]] call BIS_fnc_param;
 _unit = [_this,1,ObjNull,[ObjNull]] call BIS_fnc_param;
 _data= [_this,2,"",[""]] call BIS_fnc_param;
 _queryResult = [];
+<<<<<<< HEAD
 _query = "";
+=======
+
+>>>>>>> origin/master
 //Error checks
 
 diag_log format ["%1   %2    %3",_unit,_type,_data];
@@ -68,7 +72,9 @@ default {_query =  "Error"};
 	};
 
 } forEach life_economy;
+
 diag_log format["QR: %1",_queryResult];
+
 if (_data == "economy") exitwith {[[_type,_queryResult],"life_fnc_virt_updateEconomy",_unit,false] spawn life_fnc_MP;};
 
 [[_type,_queryResult],"life_fnc_virt_updateprice",_unit,false] spawn life_fnc_MP;
