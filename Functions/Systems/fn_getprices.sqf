@@ -71,7 +71,7 @@ default {_query =  "Error"};
 
 } forEach life_economy;
 
-diag_log format["QR: %1",_queryResult];
+//diag_log format["QR: %1",_queryResult];
 
 if (_data == "economy") exitwith {[[_type,_queryResult],"life_fnc_virt_updateEconomy",_unit,false] spawn life_fnc_MP;};
 

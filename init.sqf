@@ -96,7 +96,7 @@ life_economy = [];
 
 [] spawn TON_fnc_federalUpdate;
 [] spawn TON_fnc_loadEconomy;
-[] spawn TON_fnc_saveEconomy;
+
 [] spawn {
 
 	while{true} do {

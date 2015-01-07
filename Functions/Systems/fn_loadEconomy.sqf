@@ -35,9 +35,9 @@ diag_log "------------------------------------------------";
 	_minprice = _x select 6;
 	_maxprice = _x select 7;
 	life_economy pushBack [_resource,_factor,_shoptype,_buyprice,_sellprice,_varprice,_minprice,_maxprice];
-	diag_log format["RES: %1",_x];
+
 } forEach _queryResult;
 
 
-diag_log format["ECON: %1",life_economy];
+//diag_log format["ECON: %1",life_economy];
 
