@@ -10,7 +10,7 @@ _unit = _this select 0;
 _id = _this select 1;
 _uid = _this select 2;
 _name = _this select 3;
-
+if(isNull _unit) exitWith {};
 [_uid,0] spawn life_fnc_wantedRemoveLocally;
 [_uid,0] spawn life_fnc_setOnline;
 
