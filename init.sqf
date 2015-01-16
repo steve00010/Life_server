@@ -106,7 +106,15 @@ life_economy = [];
 		
 	};
 };
+[] spawn {
 
+	while{true} do {
+	
+	sleep((60*60*6)-60);
+	[] spawn TON_fnc_RemoveActiveVehicles;
+		
+	};
+};
 [] spawn
 {
 	while {true} do

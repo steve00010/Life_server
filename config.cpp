@@ -115,6 +115,7 @@ class CfgFunctions
 			class goldUpdate {};
 			class loadEconomy {};
 			class saveEconomy {};
+			class RemoveActiveVehicles {};
 		};
 			
 		class Housing
