@@ -96,7 +96,7 @@ life_economy = [];
 
 [] spawn TON_fnc_federalUpdate;
 [] spawn TON_fnc_loadEconomy;
-
+[] spawn TON_fnc_RemoveActiveVehicles;
 [] spawn {
 
 	while{true} do {
@@ -106,15 +106,9 @@ life_economy = [];
 		
 	};
 };
-[] spawn {
 
-	while{true} do {
-	
-	sleep((60*60*6)-60);
-	[] spawn TON_fnc_RemoveActiveVehicles;
 		
-	};
-};
+
 [] spawn
 {
 	while {true} do
