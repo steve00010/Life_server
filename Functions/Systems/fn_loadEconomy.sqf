@@ -7,7 +7,7 @@ Send a query to retrieve the price of stuff on the server
 */
 private["_type","_side","_data","_unit","_ret","_tickTime","_queryResult"];
 
-_query = "SELECT ressource, buyprice, sellprice, shoptype,factor, varprice, minprice, maxprice FROM economy";
+_query = "SELECT ressource, buyprice, sellprice, shoptype,factor, varprice, minprice, maxprice FROM economy ORDER BY ressource";
 
 
 
