@@ -58,6 +58,7 @@ life_adminlevel = 0;
 life_medicLevel = 0;
 life_coplevel = 0;
 life_playtime_values = [];
+life_federal_funds = (count playableUnits) * 2000;
 
 //Null out harmful things for the server.
 __CONST__(JxMxE_PublishVehicle,"No");

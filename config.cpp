@@ -115,7 +115,8 @@ class CfgFunctions
 			class goldUpdate {};
 			class loadEconomy {};
 			class saveEconomy {};
-			class RemoveActiveVehicles {};
+			class CasinoRaid {};
+			class CasinoState {};
 		};
 			
 		class Housing
