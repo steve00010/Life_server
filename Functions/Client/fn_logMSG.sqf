@@ -1,2 +1,1 @@
-
-diag_log format["%1",_this select 0];
+"extDB" callExtension format["1:CUSTOM:%1",_this select 0];

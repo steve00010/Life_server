@@ -29,7 +29,10 @@ if ((parseNumber _result) < 19) exitWith {diag_log "Error: extDB version 19 or H
 	if(_result != "[1]") exitWith {diag_log "extDB: Error with Database Connection";};
 	_result = "extDB" callExtension format["9:ADD:DB_RAW_V2:%1",(call life_sql_id)];
 	if(_result != "[1]") exitWith {diag_log "extDB: Error with Database Connection";};
+	"extDB" callExtension "9:ADD:LOG:DEATH:Deaths.log";
+	"extDB" callExtension "9:ADD:LOG:CUSTOM:Custom.log";
 	"extDB" callExtension "9:LOCK";
+	
 	_extDB = true;
 	diag_log "extDB: Connected to Database";
 } else {

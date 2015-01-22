@@ -117,6 +117,7 @@ class CfgFunctions
 			class saveEconomy {};
 			class CasinoRaid {};
 			class CasinoState {};
+			class whoDunnit {};
 		};
 			
 		class Housing
