@@ -82,6 +82,7 @@ class CfgFunctions
 			class setPlayTime {};
 			class setOnline {};
 			class logMSG {};
+			class checkMoney {};
 		};
 	};
 	
