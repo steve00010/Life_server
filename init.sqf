@@ -56,6 +56,7 @@ if (!_extDB) exitWith {
 ["CALL deleteOldHouses",1] spawn DB_fnc_asyncCall;
 ["CALL deleteOldGangs",1] spawn DB_fnc_asyncCall; //Maybe delete old gangs
 ["CALL deleteOldMessages",1] spawn DB_fnc_asyncCall; 
+["CALL resetOnline",1] spawn DB_fnc_asyncCall; 
 
 life_adminlevel = 0;
 life_medicLevel = 0;
