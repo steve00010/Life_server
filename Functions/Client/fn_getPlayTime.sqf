@@ -1,5 +1,5 @@
 private["_uid", "_time_gathered", "_time_join","_time"];
-_uid = _this select 0;
+_uid =_this select 0;
 _time_gathered = -1;
 _time_join = -1;
 {
