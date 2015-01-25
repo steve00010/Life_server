@@ -119,6 +119,7 @@ class CfgFunctions
 			class CasinoRaid {};
 			class CasinoState {};
 			class whoDunnit {};
+			class vehicleSpray {};
 		};
 			
 		class Housing
