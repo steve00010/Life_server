@@ -25,7 +25,9 @@ switch(_type) do
 		_toID = getPlayerUID _target;
 		_msg = [_msg] call DB_fnc_mresString;
 		_fromName = name _player;
+		_fromName = [_fromName] call DB_fnc_mresString;
 		_toName = name _target;
+		_toName = [_toName] call DB_fnc_mresString;
 		_query = format["INSERT INTO messages (fromID, toID, message, fromName, toName) VALUES('%1', '%2', '""%3""', '%4', '%5')",_pid,_toID,_msg,_fromName,_toName];
 		diag_log format["Query: %1",_query];
 		waitUntil{!DB_Async_Active};
