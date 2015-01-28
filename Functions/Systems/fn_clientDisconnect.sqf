@@ -5,7 +5,7 @@
 	When a client disconnects this will remove their corpse and
 	clean up their storage boxes in their house.
 */
-private["_unit","_id","_uid","_name"];
+private["_unit","_id","_uid","_name","_playerIsDead"];
 _unit = _this select 0;
 _id = _this select 1;
 _uid = _this select 2;
@@ -13,7 +13,7 @@ _name = _this select 3;
 if(isNull _unit) exitWith {};
 [_uid,0] spawn life_fnc_wantedRemoveLocally;
 [_uid,0] spawn life_fnc_setOnline;
-
+_playerIsDead = alive _unit;
 _containers = nearestObjects[_unit,["WeaponHolderSimulated"],5];
 {deleteVehicle _x;} foreach _containers;
 deleteVehicle _unit;
@@ -60,6 +60,11 @@ if (!_playerIsDead) then
 			};
 		} foreach playableUnits;
 	};
+} else {
+	diag_log format["Player %1 (%2) disconnected while dead!",_name,_uid];
+	_query = format["Update PLAYERS set civ_gear ='""[]""' where pid='%1'",_uid];
+	waitUntil {sleep (random 0.3); !DB_Async_Active};
+	_queryResult = [_query,1] call DB_fnc_asyncCall;
 };
 
 _uid spawn TON_fnc_houseCleanup;
