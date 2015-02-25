@@ -11,7 +11,7 @@ if(_houseID == -1) exitWith {systemChat "HouseID invalid";};
 
 _containers = _house getVariable ["containers",[]];
 
-systemChat format["Number of containers found: %1",count _containers];
+//systemChat format["Number of containers found: %1",count _containers];
 _arr = [];
 {
 	_className = typeOf _x;

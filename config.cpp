@@ -1,3 +1,6 @@
+#define true 1
+#define false 0
+
 class DefaultEventhandlers;
 class CfgPatches 
 {
@@ -7,9 +10,34 @@ class CfgPatches
 		weapons[] = {};
 		requiredAddons[] = {"A3_Data_F","A3_Soft_F","A3_Soft_F_Offroad_01","A3_Characters_F"};
 		fileName = "life_server.pbo";
-		author[]= {"TAW_Tonic"}; 
+		author[]= {"Tonic"}; 
 	};
 };
+
+/*Server Settings*/
+
+class CfgServerSettings
+{
+	class extDB
+	{
+		/*Database Selection*/
+		Database = "AltisLife"; //Database config name
+		/*RCON Settings*/
+		RCON = false; //Enabled?
+		RCON_Selection = "RCON"; //Selection of what RCON config to pull from the extDB Configuration file eg. [RCON]
+		/*VAC Settings*/
+		VAC = false; //Enabled? If you want to ban VAC'd players, edit it in the extDB Configuration file.
+		/*MISC settings*/
+		MISC = false; //Enabled? Allows you to use certain features that are not really related to the database for extDB
+		/*Logging Settings*/
+		LOG = false; //Custom Logging Enabled?
+		LOG_Settings[] = {{"HACKER","hacker.log"},{"LOG2","debug.log"}}; //First Selection = ID | Second Selection = Log File
+		/*Debug*/
+		MySQL_Query = true; //Log queries? Only set this to true if you are developing.
+	};
+};
+
+/*Functions*/
 
 class CfgFunctions
 {
@@ -32,7 +60,7 @@ class CfgFunctions
 			class missionTimeLeft{};
 		};
 	};
-		
+	
 	class MySQL_Database
 	{
 		tag = "DB";
@@ -62,19 +90,18 @@ class CfgFunctions
 			class wantedFetch {};
 			class wantedPerson {};
 			class wantedBounty {};
-			class wantedTicket {};
-			class wantedPardon {};
 			class wantedRemove {};
-			class wantedRemoveLocally {};
 			class wantedAdd {};
-			class wantedPunish {};
-			class initWanted {};
+			class wantedCrimes {};
+			class wantedProfUpdate {};
 		};
-			class Jail_Sys
-		{ 
+		
+		class Jail_Sys
+		{
 			file = "\life_server\Functions\Jail";
 			class jailSys {};
 		};
+		
 		class Client_Code
 		{
 			file = "\life_server\Functions\Client";
@@ -85,7 +112,17 @@ class CfgFunctions
 			class checkMoney {};
 		};
 	};
-	
+	class GHBSystem
+	{
+		tag = "GHB";
+		class Smartphone
+		{
+			file = "\life_server\Functions\Smartphone";
+			class handleMessages {};
+			class msgRequest {};
+			class removeMsg {};
+		};	
+	};
 	class TON_System
 	{
 		tag = "TON";
@@ -93,7 +130,7 @@ class CfgFunctions
 		{
 			file = "\life_server\Functions\Systems";
 			class managesc {};
-			class cleanup {};	
+			class cleanup {};
 			class huntingZone {};
 			class getID {};
 			class vehicleCreate {};
@@ -111,17 +148,14 @@ class CfgFunctions
 			class cleanupRequest {};
 			class setObjVar {};
 			class keyManagement {};
-			class getPrices {};
-			class ajustprices {};
-			class goldUpdate {};
 			class loadEconomy {};
-			class saveEconomy {};
+			class getPrices {};
+			class vehicleSpray {};
 			class CasinoRaid {};
 			class CasinoState {};
-			class whoDunnit {};
-			class vehicleSpray {};
+			class goldUpdate {};
 		};
-			
+		
 		class Housing
 		{
 			file = "\life_server\Functions\Housing";
@@ -133,7 +167,7 @@ class CfgFunctions
 			class updateHouseTrunk {};
 			class houseCleanup {};
 		};
-			
+		
 		class Gangs
 		{
 			file = "\life_server\Functions\Gangs";
@@ -142,28 +176,14 @@ class CfgFunctions
 			class removeGang {};
 			class updateGang {};
 		};
-			
-		class Smartphone
+
+		class Actions
 		{
-			file = "\life_server\Functions\Smartphone";
-			class handleMessages {};
-			class msgRequest {};
-			class removeMsg {};
+			file = "\life_server\Functions\Actions";
+			class pickupAction {};
 		};
- 	};	
-	
-	/*class GHBSystem
-	{
-		
-		tag = "GHB";
-		class Smartphone
-			{
-					file = "\life_server\Functions\Smartphone";
-					class handleMessages {};
-					class msgRequest {};
-			};
-	};*/
- };
+	};
+};
 
 class CfgVehicles
 {
