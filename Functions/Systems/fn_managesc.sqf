@@ -38,18 +38,6 @@ switch (_side) do
 		};
 	};
 	
-	case east:
-	{
-		if(_bool) then
-		{
-			life_radio_east radioChannelAdd [_unit];
-		}
-			else
-		{
-			life_radio_east radioChannelRemove [_unit];
-		};
-	};
-	
 	case independent:
 	{
 		if(_bool) then

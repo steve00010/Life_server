@@ -102,6 +102,7 @@ if(!(EQUAL(life_server_extDB_notLoaded,""))) exitWith {}; //extDB did not fully 
 ["CALL deleteDeadVehicles",1] spawn DB_fnc_asyncCall;
 ["CALL deleteOldHouses",1] spawn DB_fnc_asyncCall;
 ["CALL deleteOldGangs",1] spawn DB_fnc_asyncCall;
+["CALL resetOnline",1] spawn DB_fnc_asyncCall;
 
 /* Map-based server side initialization. */
 
@@ -135,14 +136,12 @@ onMapSingleClick "if(_alt) then {vehicle player setPos _pos};"; //Local debug fo
 life_adminLevel = 0;
 life_medicLevel = 0;
 life_copLevel = 0;
-life_adaclevel = 0;
 CONST(JxMxE_PublishVehicle,"false");
 life_playtime_values = [];
 /* Setup radio channels for west/independent/civilian */
 life_radio_west = radioChannelCreate [[0, 0.95, 1, 0.8], "Side Channel", "%UNIT_NAME", []];
 life_radio_civ = radioChannelCreate [[0, 0.95, 1, 0.8], "Side Channel", "%UNIT_NAME", []];
 life_radio_indep = radioChannelCreate [[0, 0.95, 1, 0.8], "Side Channel", "%UNIT_NAME", []];
-life_radio_east = radioChannelCreate [[0, 0.95, 1, 0.8], "Side Channel", "%UNIT_NAME", []];
 
 /* Set the amount of gold in the federal reserve at mission start */
 fed_bank setVariable ["safe",count playableUnits,true];
@@ -193,4 +192,4 @@ life_server_isReady = true;
 PVAR_ALL("life_server_isReady");
 
 /* Initialize hunting zone(s) */
-["hunting_zone",30] spawn TON_fnc_huntingZone;
+["hunting_zone",60] spawn TON_fnc_huntingZone;
