@@ -115,6 +115,16 @@ switch (_side) do {
 		_queryResult pushBack (missionNamespace getVariable[format["gang_%1",_uid],[]]);
 		
 	};
+	case east: {
+		_old = _queryResult select 9;
+		_new = _old;
+		if(typeName _old == "STRING") then
+		{
+			_new = parseNumber _old;
+		};
+		[_uid, _new] call life_fnc_setPlayTime;
+		_queryResult set[9,_new];
+	}
 	case independent: {
 		_old = _queryResult select 9;
 		_new = _old;
