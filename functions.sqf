@@ -145,7 +145,7 @@ private[""_msg"",""_to""];
 	ctrlShow[3022,true];
 ";
 //To ARC
-TON_fnc_cell_adacrequest = 
+TON_fnc_cell_arcrequest = 
 compileFinal "
 private[""_msg"",""_to""];
 	ctrlShow[3023,false];
@@ -324,7 +324,7 @@ compileFinal "
 		case 6: {
 			private[""_message""];
 			_message = format[""!!!ARC REQUEST: %1"",_msg];
-			hint parseText format [""<t color='#FFCC00'><t size='2'><t align='center'>ADAC Request<br/><br/><t color='#33CC33'><t align='left'><t size='1'>To: <t color='#ffffff'>You<br/><t color='#33CC33'>From: <t color='#ffffff'>%1<br/><br/><t color='#33CC33'>Message:<br/><t color='#ffffff'>%2"",_from,_msg];
+			hint parseText format [""<t color='#FFCC00'><t size='2'><t align='center'>ARC Request<br/><br/><t color='#33CC33'><t align='left'><t size='1'>To: <t color='#ffffff'>You<br/><t color='#33CC33'>From: <t color='#ffffff'>%1<br/><br/><t color='#33CC33'>Message:<br/><t color='#ffffff'>%2"",_from,_msg];
 			
 			[""TextMessage"",[format[""ARC Request from %1"",_from]]] call bis_fnc_showNotification;
 		};		
