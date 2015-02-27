@@ -139,7 +139,7 @@ life_copLevel = 0;
 life_arclevel = 0;
 CONST(JxMxE_PublishVehicle,"false");
 life_playtime_values = [];
-/* Setup radio channels for west/independent/civilian */
+/* Setup radio channels for west/independent/civilian/east */
 life_radio_west = radioChannelCreate [[0, 0.95, 1, 0.8], "Side Channel", "%UNIT_NAME", []];
 life_radio_civ = radioChannelCreate [[0, 0.95, 1, 0.8], "Side Channel", "%UNIT_NAME", []];
 life_radio_indep = radioChannelCreate [[0, 0.95, 1, 0.8], "Side Channel", "%UNIT_NAME", []];
