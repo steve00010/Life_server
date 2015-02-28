@@ -124,7 +124,7 @@ switch (_side) do {
 		};
 		[_uid, _new] call life_fnc_setPlayTime;
 		_queryResult set[9,_new];
-	}
+	};
 	case independent: {
 		_old = _queryResult select 9;
 		_new = _old;
